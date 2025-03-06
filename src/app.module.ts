@@ -8,6 +8,7 @@ import { UserController } from './User/user.controller';
 import { UserService } from './User/user.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { ConfiguracionMensajeModule } from './configuracion-mensaje/configuracion-mensaje.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     ConfigModule.forRoot({
       isGlobal : true,
-    })
+    }),
+    ConfiguracionMensajeModule
   ],
   controllers: [AppController, UserController],
   providers: [AppService, UserService],

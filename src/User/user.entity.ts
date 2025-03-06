@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { ConfiguracionMensaje } from 'src/configuracion-mensaje/configracion-mensaje.entity';
 
 @Entity()
 export class User {
@@ -23,4 +24,6 @@ export class User {
     })
     @Column({type: 'varchar', unique: false})
     sesionToken: string;
+    @OneToMany(() => ConfiguracionMensaje , configuracion => configuracion.user)
+    configuracion: ConfiguracionMensaje[]
 }

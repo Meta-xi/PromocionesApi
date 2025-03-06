@@ -77,4 +77,17 @@ export class UserController {
             message: 'Usuario desconectado exitosamente'
         })
     }
+    @Get('StringSession/:idUserTelegram')
+    @UseGuards(JwtAuthGuard)
+    async getStringSession(@Param('idUserTelegram',ParseIntPipe) idUserTelegram: number, @Res() res : Response){
+        const user = await this.userService.findByTelegramId(idUserTelegram);
+        if(user === null){
+            return res.status(HttpStatus.NOT_FOUND).json({
+                message : 'El usuario no se encuentra conectado en el bot'
+            });
+        }
+        return res.status(HttpStatus.OK).json({
+            stringSession : user.sesionToken
+        });
+    }
 }
